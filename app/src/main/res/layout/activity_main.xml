@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fitsSystemWindows="true"
+    android:id="@+id/mainLy"
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/network_selector_bg"
+        android:fontFamily="@font/semi_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="MAINNET"
+        android:textColor="@color/primary"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/shiny_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="18dp"
+        android:rotation="0"
+        app:cardCornerRadius="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:id="@+id/cardLy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/floating_blobs_gradient_bg"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/light"
+                android:includeFontPadding="false"
+                android:text="Total balance"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/balanceTw"
+                style="@style/TextAppearance.AppCompat.Display2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/semi_bold"
+                android:includeFontPadding="false"
+                android:text="100,000"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:id="@+id/stakedBalanceLy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
+                    android:includeFontPadding="false"
+                    android:text="Staked balance:"
+                    android:textColor="#D5FFFFFF" />
+
+                <TextView
+                    android:id="@+id/stakedBalanceTw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/semi_bold"
+                    android:includeFontPadding="false"
+                    android:text="1,000"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/sendTw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:paddingVertical="15dp"
+                    android:text="Send"
+                    android:textColor="@color/white"
+                    app:autoSizeMaxTextSize="17sp"
+                    app:autoSizeMinTextSize="15sp"
+                    app:autoSizeTextType="uniform"
+                    app:drawableTint="@color/white"
+                    app:drawableTopCompat="@drawable/round_arrow_upward_24" />
+
+                <TextView
+                    android:id="@+id/receiveTw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:paddingVertical="15dp"
+                    android:text="Receive"
+                    android:textColor="@color/white"
+                    app:autoSizeMaxTextSize="17sp"
+                    app:autoSizeMinTextSize="15sp"
+                    app:autoSizeTextType="uniform"
+                    app:drawableTint="@color/white"
+                    app:drawableTopCompat="@drawable/round_arrow_downward_24" />
+
+                <TextView
+                    android:id="@+id/stakeTw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:paddingVertical="15dp"
+                    android:text="Stake"
+                    android:textColor="@color/white"
+                    app:autoSizeMaxTextSize="17sp"
+                    app:autoSizeMinTextSize="15sp"
+                    app:autoSizeTextType="uniform"
+                    app:drawableTint="@color/white"
+                    app:drawableTopCompat="@drawable/round_lock_24" />
+
+                <TextView
+                    android:id="@+id/unStakeTw"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/medium"
+                    android:gravity="center"
+                    android:paddingVertical="15dp"
+                    android:text="Unstake"
+                    android:textColor="@color/white"
+                    app:autoSizeMaxTextSize="17sp"
+                    app:autoSizeMinTextSize="15sp"
+                    app:autoSizeTextType="uniform"
+                    app:drawableTint="@color/white"
+                    app:drawableTopCompat="@drawable/round_lock_open_24" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/extra_light"
+        android:text="Transactions"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/shiny_logo"
+            app:shapeAppearanceOverlay="@style/Circular" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/regular"
+            android:padding="10dp"
+            android:text="No transactions, yet"
+            android:textColor="#ABFFFFFF" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
