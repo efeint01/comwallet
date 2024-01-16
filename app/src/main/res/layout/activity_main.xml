@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     android:fitsSystemWindows="true"
-    android:id="@+id/mainLy"
     tools:context=".activities.MainActivity">
 
     <TextView
@@ -20,13 +20,13 @@
         android:text="MAINNET"
         android:textColor="@color/primary"
         android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/walletImg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/walletImg" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/walletImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
@@ -119,6 +119,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/medium"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:paddingVertical="15dp"
                     android:text="Send"
@@ -135,6 +136,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/medium"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:paddingVertical="15dp"
                     android:text="Receive"
@@ -151,6 +153,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/medium"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:paddingVertical="15dp"
                     android:text="Stake"
@@ -167,6 +170,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:fontFamily="@font/medium"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:gravity="center"
                     android:paddingVertical="15dp"
                     android:text="Unstake"
