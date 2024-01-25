@@ -8,6 +8,7 @@ material = "1.10.0"
 constraintlayout = "2.1.4"
 navigation-fragment = "2.7.4"
 navigation-ui = "2.7.4"
+kotlin = "1.8.21"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -21,4 +22,5 @@ navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 

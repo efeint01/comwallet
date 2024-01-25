@@ -9,7 +9,6 @@
     android:focusable="true"
     tools:context=".fragments.CreateWalletFragment">
 
-
     <ImageView
         android:id="@+id/backImg"
         android:layout_width="wrap_content"

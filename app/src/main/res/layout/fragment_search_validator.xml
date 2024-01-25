@@ -7,7 +7,8 @@
     android:background="@color/black"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".fragments.UnstakeFragment">
+    tools:context=".fragments.SearchValidatorFragment">
+
 
     <ImageView
         android:id="@+id/backImg"
@@ -24,13 +25,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/extra_light"
-        android:text="@string/unstake"
+        android:text="Search Validator"
         android:textColor="@color/white"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backImg" />
-
 
     <TextView
         android:id="@+id/textView6"
@@ -39,74 +39,45 @@
         android:fontFamily="@font/light"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:text="@string/unstake_desc"
+        android:text="Search validators to find the highest stake COM APY (Annual Percentage Yield)."
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/sendBtn"
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_margin="30dp"
+        android:background="@drawable/bg_oval_white"
+        app:closeIcon="@drawable/round_close_24"
+        app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:queryHint="Enter your search" />
 
-        <com.cottacush.android.currencyedittext.CurrencyEditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:fontFamily="@font/regular"
-            android:hint="0"
-            android:includeFontPadding="false"
-            android:inputType="number"
-            android:textColor="@color/white"
-            android:textColorHint="@color/hint"
-            android:textSize="175sp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/extra_light"
-                android:includeFontPadding="false"
-                android:text="Staked balance: "
-                android:textColor="@color/white"
-                android:textSize="21sp" />
-
-            <TextView
-                android:id="@+id/stakedBalanceTw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/medium"
-                android:includeFontPadding="false"
-                android:text="10 COM"
-                android:textColor="@color/white"
-                android:textSize="21sp" />
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/light"
+        android:text="Validator APY: 40%"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <Button
-        android:id="@+id/sendBtn"
+        android:id="@+id/nextBtn"
         style="@style/ButtonRoundedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="Unstake"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

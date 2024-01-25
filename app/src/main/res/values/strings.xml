@@ -53,5 +53,13 @@
     <string name="receive_desc">Scan QR Code or tap to copy your wallet address to receive $COM</string>
     <string name="unstake">Unstake</string>
     <string name="unstake_desc">Unlock your $COMs by unstaking them, making them available for transfers.</string>
+    <string name="invalid_words">Invalid Words</string>
+
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="secret_words_disclaimer">If you lose your secret words, you will lose your access to your wallet.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stake">Stake</string>
+    <string name="stake_desc">Stake your COMs and enjoy a current validator annual percentage yield (APY) of 40%</string>
 
 </resources>

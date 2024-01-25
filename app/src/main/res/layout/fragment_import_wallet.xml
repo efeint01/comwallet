@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:clickable="true"
     android:background="@color/black"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".fragments.CreateWalletFragment">
 
 
@@ -68,21 +68,27 @@
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="1"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw2"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="2"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw3"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="3"
+            android:imeOptions="actionNext" />
 
         <!-- Row 2 -->
         <MultiAutoCompleteTextView
@@ -90,21 +96,27 @@
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="4"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw5"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="5"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw6"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="6"
+            android:imeOptions="actionNext" />
 
         <!-- Row 3 -->
         <MultiAutoCompleteTextView
@@ -112,21 +124,27 @@
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="7"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw8"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="8"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw9"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="9"
+            android:imeOptions="actionNext" />
 
         <!-- Row 4 -->
         <MultiAutoCompleteTextView
@@ -134,21 +152,27 @@
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="10"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw11"
             style="@style/RowSecretWordStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="11"
+            android:imeOptions="actionNext" />
 
         <MultiAutoCompleteTextView
             android:id="@+id/secretWordTw12"
             style="@style/RowSecretWordStyle"
+            android:imeOptions="actionDone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_columnWeight="1" />
+            android:layout_columnWeight="1"
+            android:hint="12" />
 
     </GridLayout>
 
@@ -157,11 +181,26 @@
         style="@style/ButtonRoundedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:layout_margin="20dp"
         android:text="@string/import_wallet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/errorTw"
+        android:gravity="center"
+        style="@style/ErrorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/invalid_words"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gridLayout"
+        tools:text="Error Text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

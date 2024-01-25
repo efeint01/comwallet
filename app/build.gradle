@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
-}
+    alias(libs.plugins.kotlinAndroid)
 
+}
 android {
     namespace 'com.app.comwallet'
     compileSdk 34
@@ -23,9 +24,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
+
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+
     buildFeatures {
         viewBinding true
     }
@@ -48,5 +54,9 @@ dependencies {
 
     //QRCode
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+
+    //BIP39 SDK
+    implementation 'io.github.novacrypto:BIP39:2019.01.27'
+
 
 }

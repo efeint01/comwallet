@@ -8,5 +8,6 @@
     <color name="light">#FF529E</color>
 
     <color name="hint">#737373</color>
+    <color name="red">#D50000</color>
 
 </resources>
