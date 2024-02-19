@@ -20,6 +20,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Locale;
 
+import io.github.novacrypto.bip39.SeedCalculator;
+
 public class CreateWalletFragment extends Fragment {
 
 
@@ -27,7 +29,6 @@ public class CreateWalletFragment extends Fragment {
     String TAG = CreateWalletFragment.class.getSimpleName();
 
     //TODO: Add screen lock when mnemonic is ready
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -46,11 +47,12 @@ public class CreateWalletFragment extends Fragment {
     }
 
     private void generateWallet() {
-        String[] mnemonic = MnemonicUtils.generateMnemonic().split(" ");
-        parseMnemonic(mnemonic);
+        String mnemonic_phrase = MnemonicUtils.generateMnemonic();
+        byte[] seed = new SeedCalculator().calculateSeed(mnemonic_phrase, "");
+        parseMnemonicToTextViews(mnemonic_phrase.split(" "));
     }
 
-    private void parseMnemonic(String[] mnemonic) {
+    private void parseMnemonicToTextViews(String[] mnemonic) {
         for (int i = 0; i < 12; i++) {
             TextView textView = getTextViewByIndex(i);
             if (textView != null) {

@@ -1,7 +1,5 @@
 package com.app.comwallet.activities;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;

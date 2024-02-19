@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.app.comwallet"
-        minSdk 24
+        minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -44,6 +44,16 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.navigation.fragment
     implementation libs.navigation.ui
+    implementation files('libs/polkaj-api-base.jar')
+    implementation files('libs/polkaj-api-http.jar')
+    implementation files('libs/polkaj-api-ws.jar')
+    implementation files('libs/polkaj-common-types.jar')
+    implementation files('libs/polkaj-json-types.jar')
+    implementation files('libs/polkaj-scale.jar')
+    implementation files('libs/polkaj-scale-types.jar')
+    implementation files('libs/polkaj-ss58.jar')
+    implementation files('libs/polkaj-tx.jar')
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.espresso.core
@@ -57,6 +67,21 @@ dependencies {
 
     //BIP39 SDK
     implementation 'io.github.novacrypto:BIP39:2019.01.27'
+
+    implementation 'cafe.cryptography:curve25519-elisabeth:0.1.0'
+    implementation 'commons-codec:commons-codec:1.14'
+    implementation 'com.github.multiformats:java-multibase:v1.1.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+
+    // for xxHash
+    implementation 'net.openhft:zero-allocation-hashing:0.11'
+    implementation 'org.bouncycastle:bcprov-jdk15on:1.65'
+
+    //Volley
+    implementation 'com.android.volley:volley:1.2.1'
+
+
 
 
 }

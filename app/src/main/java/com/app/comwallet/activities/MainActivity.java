@@ -3,28 +3,35 @@ package com.app.comwallet.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.AnimationDrawable;
-import android.location.Address;
 import android.os.Bundle;
+
 import android.view.View;
 
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.app.comwallet.R;
 import com.app.comwallet.databinding.ActivityMainBinding;
 import com.app.comwallet.fragments.ReceiveFragment;
 import com.app.comwallet.fragments.SearchValidatorFragment;
 import com.app.comwallet.fragments.SendFragment;
 import com.app.comwallet.fragments.UnstakeFragment;
+
 import com.app.comwallet.utilities.FragmentUtils;
+
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
-    public static String endPoint = "ws://142.93.240.200:9944";
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        requestQueue = Volley.newRequestQueue(this);
 
         binding.cardLy.setBackgroundResource(R.drawable.gradient_animation);
         binding.sendTw.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +71,7 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(1500);
         animationDrawable.start();
 
-
     }
-
 
 
 }

@@ -1,15 +1,7 @@
 package com.app.comwallet.fragments;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -21,24 +13,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.app.comwallet.R;
 import com.app.comwallet.activities.MainActivity;
 import com.app.comwallet.databinding.FragmentImportWalletBinding;
 import com.app.comwallet.utilities.EnglishWordListUtils;
-import com.app.comwallet.utilities.MnemonicUtils;
 import com.app.comwallet.utilities.SecretWordTokenizer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import io.github.novacrypto.bip39.MnemonicGenerator;
 import io.github.novacrypto.bip39.MnemonicValidator;
 import io.github.novacrypto.bip39.Validation.InvalidChecksumException;
 import io.github.novacrypto.bip39.Validation.InvalidWordCountException;
 import io.github.novacrypto.bip39.Validation.UnexpectedWhiteSpaceException;
 import io.github.novacrypto.bip39.Validation.WordNotFoundException;
-import io.github.novacrypto.bip39.WordList;
 import io.github.novacrypto.bip39.wordlists.English;
 
 
@@ -118,8 +110,6 @@ public class ImportWalletFragment extends Fragment {
         setBackspaceListener(binding.secretWordTw9, binding.secretWordTw10);
         setBackspaceListener(binding.secretWordTw10, binding.secretWordTw11);
         setBackspaceListener(binding.secretWordTw11, binding.secretWordTw12);
-
-        pasteMnemonicFromClipboard();
 
         binding.importBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,47 +247,6 @@ public class ImportWalletFragment extends Fragment {
         }
 
         return false;
-    }
-
-    private void pasteMnemonicFromClipboard() {
-        // Get the clipboard manager
-        ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboard != null) {
-            if (clipboard.hasPrimaryClip()) {
-                ClipData clipData = clipboard.getPrimaryClip();
-
-                if (clipData != null && clipData.getItemCount() >= 1) {
-                    // Get the first item from the clipboard
-                    CharSequence clipboardText = clipData.getItemAt(0).getText().toString().trim();
-
-                    // Split the clipboard text into words (assuming it's space-separated)
-                    String[] clipboardWords = clipboardText.toString().split(" ");
-
-                    // Check if the clipboard contains exactly 12 words
-                    if (clipboardWords.length == 12) {
-                        // Set the words in your EditText fields
-                        binding.secretWordTw.setText(clipboardWords[0]);
-                        binding.secretWordTw2.setText(clipboardWords[1]);
-                        binding.secretWordTw3.setText(clipboardWords[2]);
-                        binding.secretWordTw4.setText(clipboardWords[3]);
-                        binding.secretWordTw5.setText(clipboardWords[4]);
-                        binding.secretWordTw6.setText(clipboardWords[5]);
-                        binding.secretWordTw7.setText(clipboardWords[6]);
-                        binding.secretWordTw8.setText(clipboardWords[7]);
-                        binding.secretWordTw9.setText(clipboardWords[8]);
-                        binding.secretWordTw10.setText(clipboardWords[9]);
-                        binding.secretWordTw11.setText(clipboardWords[10]);
-                        binding.secretWordTw12.setText(clipboardWords[11]);
-
-                        enableButtonIfValidWords();
-
-                    } else {
-                        // Handle the case where there are not exactly 12 words
-                    }
-                }
-
-            }
-        }
     }
 
     @Override

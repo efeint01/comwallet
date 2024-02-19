@@ -15,6 +15,7 @@ import io.github.novacrypto.bip39.wordlists.English;
 
 public class MnemonicUtils {
 
+    //https://github.com/NovaCrypto/BIP39
     private static final String TAG = MnemonicUtils.class.getSimpleName();
 
     public static String generateMnemonic() {
