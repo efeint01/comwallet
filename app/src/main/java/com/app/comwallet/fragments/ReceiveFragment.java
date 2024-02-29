@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.app.comwallet.views.CenteredToast;
 import com.app.comwallet.databinding.FragmentReceiveBinding;
+import com.app.comwallet.utilities.AppUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -23,6 +25,7 @@ public class ReceiveFragment extends Fragment {
 
     FragmentReceiveBinding binding;
     String walletAddress;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,11 +45,16 @@ public class ReceiveFragment extends Fragment {
         Bundle args = getArguments();
         if (args == null) return;
         walletAddress = args.getString("walletAddress");
-
         binding.doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getParentFragmentManager().popBackStack();
+            }
+        });
+        binding.copyMyAddressBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                copyWalletAddress();
             }
         });
         binding.backImg.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +65,20 @@ public class ReceiveFragment extends Fragment {
         });
 
         binding.walletAddressTw.setText(walletAddress);
+        binding.walletAddressTw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                copyWalletAddress();
+            }
+        });
 
         generateQRCode(walletAddress);
+    }
+
+    private void copyWalletAddress() {
+        if (getActivity() == null) return;
+        AppUtils.copyToClipboard(getActivity(),walletAddress);
+        CenteredToast.show(getContext(),"Wallet Address Copied");
     }
 
     private void generateQRCode(String walletAddress) {

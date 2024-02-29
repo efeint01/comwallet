@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="5dp"
+    android:orientation="vertical"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/walletNameTw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/regular"
+        android:includeFontPadding="false"
+        android:paddingBottom="5dp"
+        android:text="Wallet 1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/walletImg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/shiny_logo"
+            app:shapeAppearanceOverlay="@style/Circular" />
+
+        <TextView
+            android:id="@+id/walletAddressTw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/medium"
+            android:gravity="start"
+            android:includeFontPadding="false"
+            android:text="5Gn...g8GdX"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:padding="10dp"
+            android:id="@+id/walletSettingsTw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_more_horiz_24" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

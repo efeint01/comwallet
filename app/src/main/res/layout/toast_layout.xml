@@ -1,0 +1,12 @@
+<!-- res/layout/toast_layout.xml -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textViewToast"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/medium"
+    android:gravity="center"
+    android:background="@drawable/bg_rounded_gray_transparent"
+    android:padding="16dp"
+    android:includeFontPadding="false"
+    android:textColor="@color/white"
+    android:textSize="16sp" />

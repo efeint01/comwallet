@@ -53,6 +53,7 @@ dependencies {
     implementation files('libs/polkaj-scale-types.jar')
     implementation files('libs/polkaj-ss58.jar')
     implementation files('libs/polkaj-tx.jar')
+    implementation files('libs\\polkaj-schnorrkel.jar')
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
@@ -80,6 +81,17 @@ dependencies {
 
     //Volley
     implementation 'com.android.volley:volley:1.2.1'
+
+
+    implementation 'com.caverock:androidsvg-aar:1.4'
+
+
+    implementation "androidx.room:room-runtime:2.6.1"
+    annotationProcessor "androidx.room:room-compiler:2.6.1"
+
+    implementation 'org.apache.commons:commons-text:1.7'
+    implementation "com.airbnb.android:lottie:5.2.0"
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
 
 

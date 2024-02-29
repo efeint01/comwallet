@@ -5,11 +5,11 @@
     android:id="@+id/welcomeLy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     android:fitsSystemWindows="true"
     tools:context=".activities.WelcomeActivity">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
+        app:shapeAppearanceOverlay="@style/Circular"
         android:id="@+id/imageView"
         android:layout_width="175dp"
         android:layout_height="175dp"
@@ -28,7 +28,7 @@
         android:fontFamily="@font/semi_bold"
         android:includeFontPadding="false"
         android:text="@string/app_name"
-        android:textColor="@color/white"
+        android:textColor="?android:textColorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -42,7 +42,6 @@
         android:fontFamily="@font/regular"
         android:includeFontPadding="false"
         android:text="@string/welcome_desc"
-        android:textColor="#F1F1F1"
         app:layout_constraintEnd_toEndOf="@+id/appNameTw"
         app:layout_constraintStart_toStartOf="@+id/appNameTw"
         app:layout_constraintTop_toBottomOf="@+id/appNameTw" />
@@ -83,7 +82,6 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/regular"
         android:text="Version 1.0"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

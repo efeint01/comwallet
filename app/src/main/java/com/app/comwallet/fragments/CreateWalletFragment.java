@@ -12,13 +12,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.app.comwallet.ComApp;
 import com.app.comwallet.R;
+import com.app.comwallet.models.Wallet;
+import com.app.comwallet.database.WalletDao;
+import com.app.comwallet.database.WalletDatabase;
 import com.app.comwallet.activities.MainActivity;
 import com.app.comwallet.databinding.FragmentCreateWalletBinding;
+import com.app.comwallet.schnorrkel.sign.ExpansionMode;
+import com.app.comwallet.schnorrkel.sign.KeyPair;
+import com.app.comwallet.schnorrkel.sign.PrivateKey;
+import com.app.comwallet.schnorrkel.sign.PublicKey;
+import com.app.comwallet.schnorrkel.utils.HexUtils;
 import com.app.comwallet.utilities.MnemonicUtils;
+import com.app.comwallet.utilities.WalletUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import io.github.novacrypto.bip39.SeedCalculator;
 
@@ -28,7 +40,10 @@ public class CreateWalletFragment extends Fragment {
     FragmentCreateWalletBinding binding;
     String TAG = CreateWalletFragment.class.getSimpleName();
 
-    //TODO: Add screen lock when mnemonic is ready
+    private ExecutorService executor;
+    private WalletDao walletDao;
+
+    String mnemonic_phrase;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -38,18 +53,44 @@ public class CreateWalletFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void initViews() {
+        // Initialize Room database and executor service
+        WalletDatabase walletDatabase = ComApp.database;
+        walletDao = walletDatabase.walletDao();
+        executor = Executors.newSingleThreadExecutor();
+
+        binding.mnemonicLockView.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.mnemonicLockView.getRoot().setVisibility(View.GONE);
+                mnemonic_phrase = MnemonicUtils.generateMnemonic();
+                parseMnemonicToTextViews(mnemonic_phrase.split(" "));
+                binding.createBtn.setEnabled(true);
+            }
+        });
+
+        binding.createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showWarningDialog();
+            }
+        });
+
+        binding.backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
+
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         initViews();
 
-    }
-
-    private void generateWallet() {
-        String mnemonic_phrase = MnemonicUtils.generateMnemonic();
-        byte[] seed = new SeedCalculator().calculateSeed(mnemonic_phrase, "");
-        parseMnemonicToTextViews(mnemonic_phrase.split(" "));
     }
 
     private void parseMnemonicToTextViews(String[] mnemonic) {
@@ -69,9 +110,7 @@ public class CreateWalletFragment extends Fragment {
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (getActivity() == null) return;
-                        startActivity(new Intent(getContext(), MainActivity.class));
-                        getActivity().finish();
+                        createWallet();
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -81,6 +120,29 @@ public class CreateWalletFragment extends Fragment {
                     }
                 })
                 .show();
+    }
+
+    private void createWallet() {
+        byte[] seed = new SeedCalculator().calculateSeed(mnemonic_phrase, "");
+        KeyPair keyPair = KeyPair.fromSecretSeed(seed, ExpansionMode.Ed25519);
+        PrivateKey privateKey = keyPair.getPrivateKey();
+        PublicKey publicKey = keyPair.getPublicKey();
+
+        // Insert the wallet into the database
+        executor.execute(() -> {
+            Wallet wallet = new Wallet(Wallet.generateWalletName(walletDao), mnemonic_phrase, HexUtils.bytesToHex(publicKey.toPublicKey()), HexUtils.bytesToHex(privateKey.getKey()));
+            walletDao.insertWallet(wallet);
+            Wallet lastInsertedWallet = walletDao.getLastInsertedWallet();
+
+            long lastInsertedId = lastInsertedWallet.getId();
+            WalletUtils.saveSelectedWalletId(getContext(),lastInsertedId);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            getActivity().finish();
+        });
+
     }
 
 
@@ -113,32 +175,6 @@ public class CreateWalletFragment extends Fragment {
             default:
                 return null;
         }
-    }
-
-    private void initViews() {
-        binding.mnemonicLockView.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                generateWallet();
-                binding.mnemonicLockView.getRoot().setVisibility(View.GONE);
-                binding.createBtn.setEnabled(true);
-            }
-        });
-
-        binding.createBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showWarningDialog();
-            }
-        });
-
-        binding.backImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getParentFragmentManager().popBackStack();
-            }
-        });
-
     }
 
     @Override

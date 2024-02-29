@@ -17,6 +17,7 @@ import com.app.comwallet.databinding.FragmentStakeBinding;
 public class StakeFragment extends Fragment {
 
     FragmentStakeBinding binding;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

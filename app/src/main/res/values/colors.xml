@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="primary">#FF006F</color>
     <color name="dark">#9A0043</color>
     <color name="light">#FF529E</color>
 
-    <color name="hint">#737373</color>
+    <color name="hint">#5C5C5C</color>
     <color name="red">#D50000</color>
+    <color name="green">#00C853</color>
+    <color name="blue">#2962FF</color>
+
+    <color name="gray">#F5F5F5</color>
+    <color name="gray_transparent">#CC333333</color>
+
+    <color name="shimmer">#dddddd</color>
 
 </resources>

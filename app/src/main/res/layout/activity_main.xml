@@ -5,7 +5,6 @@
     android:id="@+id/mainLy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     android:fitsSystemWindows="true"
     tools:context=".activities.MainActivity">
 
@@ -25,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/walletImg" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/walletImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -33,7 +32,8 @@
         android:layout_marginEnd="16dp"
         android:src="@drawable/shiny_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/Circular" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
@@ -41,7 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="18dp"
-        android:rotation="0"
         app:cardCornerRadius="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +51,11 @@
             android:id="@+id/cardLy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:background="@drawable/floating_blobs_gradient_bg"
             android:gravity="center_vertical"
             android:orientation="vertical"
             android:padding="8dp">
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,23 +68,46 @@
                 android:textColor="@color/white"
                 android:textSize="15sp" />
 
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/balanceShimmerLy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Display2"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:autoSizeTextType="uniform"
+                    android:background="@drawable/bg_rounded_shimmer"
+                    android:fontFamily="@font/semi_bold"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white" />
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
             <TextView
                 android:id="@+id/balanceTw"
                 style="@style/TextAppearance.AppCompat.Display2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginStart="5dp"
+                android:autoSizeTextType="uniform"
                 android:fontFamily="@font/semi_bold"
                 android:includeFontPadding="false"
-                android:text="100,000"
-                android:textColor="@color/white" />
+                android:text="0"
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/stakedBalanceLy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,16 +124,18 @@
                     android:layout_marginStart="5dp"
                     android:fontFamily="@font/semi_bold"
                     android:includeFontPadding="false"
-                    android:text="1,000"
+                    android:text="0"
                     android:textColor="@color/white" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/walletActionsLy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/sendTw"
@@ -186,7 +210,6 @@
 
         </LinearLayout>
 
-
     </com.google.android.material.card.MaterialCardView>
 
 
@@ -198,38 +221,73 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/extra_light"
         android:text="Transactions"
-        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="@+id/materialCardView"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:gravity="center"
-        android:orientation="vertical"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerTransactionsLy"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/shiny_logo"
-            app:shapeAppearanceOverlay="@style/Circular" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/regular"
-            android:padding="10dp"
-            android:text="No transactions, yet"
-            android:textColor="#ABFFFFFF" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+            <include layout="@layout/row_transactions_item_shimmer" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transactionsRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:listitem="@layout/row_transactions_item" />
+
+
+    <include
+        android:id="@+id/emptyTransactionsView"
+        layout="@layout/view_empty_transactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

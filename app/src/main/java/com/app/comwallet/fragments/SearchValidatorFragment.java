@@ -48,6 +48,11 @@ public class SearchValidatorFragment extends Fragment {
         });
     }
 
+
+    private void getValidators() {
+
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

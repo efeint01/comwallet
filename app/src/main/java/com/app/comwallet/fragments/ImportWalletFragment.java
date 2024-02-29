@@ -17,16 +17,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.app.comwallet.ComApp;
 import com.app.comwallet.R;
+import com.app.comwallet.models.Wallet;
+import com.app.comwallet.database.WalletDao;
+import com.app.comwallet.database.WalletDatabase;
 import com.app.comwallet.activities.MainActivity;
 import com.app.comwallet.databinding.FragmentImportWalletBinding;
+import com.app.comwallet.schnorrkel.sign.ExpansionMode;
+import com.app.comwallet.schnorrkel.sign.KeyPair;
+import com.app.comwallet.schnorrkel.sign.PrivateKey;
+import com.app.comwallet.schnorrkel.sign.PublicKey;
+import com.app.comwallet.schnorrkel.utils.HexUtils;
 import com.app.comwallet.utilities.EnglishWordListUtils;
 import com.app.comwallet.utilities.SecretWordTokenizer;
+import com.app.comwallet.utilities.WalletUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import io.github.novacrypto.bip39.MnemonicValidator;
+import io.github.novacrypto.bip39.SeedCalculator;
 import io.github.novacrypto.bip39.Validation.InvalidChecksumException;
 import io.github.novacrypto.bip39.Validation.InvalidWordCountException;
 import io.github.novacrypto.bip39.Validation.UnexpectedWhiteSpaceException;
@@ -39,6 +52,8 @@ public class ImportWalletFragment extends Fragment {
 
     FragmentImportWalletBinding binding;
     String TAG = ImportWalletFragment.class.getSimpleName();
+    private ExecutorService executor;
+    private WalletDao walletDao;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -55,8 +70,12 @@ public class ImportWalletFragment extends Fragment {
     }
 
     private void initViews() {
-        //Set auto complete textviews bip39 word list
+        // Initialize Room database and executor service
+        WalletDatabase walletDatabase = ComApp.database;
+        walletDao = walletDatabase.walletDao();
+        executor = Executors.newSingleThreadExecutor();
 
+        //Set auto complete textviews bip39 word list
         SecretWordTokenizer secretWordTokenizer = new SecretWordTokenizer(' ');
         ArrayAdapter<String> wordsAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_recovery_phrase_selection, getWordList());
 
@@ -114,8 +133,8 @@ public class ImportWalletFragment extends Fragment {
         binding.importBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
-                getActivity().finish();
+                String mnemonic_phrase = getSecretWordsText();
+                addWallet(mnemonic_phrase);
             }
         });
 
@@ -226,7 +245,6 @@ public class ImportWalletFragment extends Fragment {
     }
 
     private boolean isValidWords(List<String> words) {
-
         try {
             MnemonicValidator
                     .ofWordList(English.INSTANCE)
@@ -247,6 +265,29 @@ public class ImportWalletFragment extends Fragment {
         }
 
         return false;
+    }
+
+    private void addWallet(String mnemonic_phrase) {
+
+
+        byte[] seed = new SeedCalculator().calculateSeed(mnemonic_phrase, "");
+        KeyPair keyPair = KeyPair.fromSecretSeed(seed, ExpansionMode.Ed25519);
+        PrivateKey privateKey = keyPair.getPrivateKey();
+        PublicKey publicKey = keyPair.getPublicKey();
+        // Insert the wallet into the database
+        executor.execute(() -> {
+            Wallet wallet = new Wallet(Wallet.generateWalletName(walletDao), mnemonic_phrase, HexUtils.bytesToHex(publicKey.toPublicKey()), HexUtils.bytesToHex(privateKey.getKey()));
+            walletDao.insertWallet(wallet);
+            Wallet lastInsertedWallet = walletDao.getLastInsertedWallet();
+
+            long lastInsertedId = lastInsertedWallet.getId();
+            WalletUtils.saveSelectedWalletId(getContext(),lastInsertedId);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            getActivity().finish();
+        });
     }
 
     @Override

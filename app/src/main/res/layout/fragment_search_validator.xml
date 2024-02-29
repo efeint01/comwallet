@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="?colorSurface"
     android:clickable="true"
     android:focusable="true"
     tools:context=".fragments.SearchValidatorFragment">
@@ -14,7 +14,9 @@
         android:id="@+id/backImg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:layout_marginStart="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_marginTop="16dp"
         android:src="@drawable/round_arrow_back_ios_new_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +28,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/extra_light"
         android:text="Search Validator"
-        android:textColor="@color/white"
+        android:textColor="?android:textColorPrimary"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +42,6 @@
         android:gravity="center"
         android:paddingHorizontal="10dp"
         android:text="Search validators to find the highest stake COM APY (Annual Percentage Yield)."
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -51,12 +52,13 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_margin="30dp"
-        android:background="@drawable/bg_oval_white"
+        android:background="@drawable/bg_oval_gray"
         app:closeIcon="@drawable/round_close_24"
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:queryBackground="@android:color/transparent"
         app:queryHint="Enter your search" />
 
     <TextView
@@ -65,7 +67,6 @@
         android:layout_margin="10dp"
         android:fontFamily="@font/light"
         android:text="Validator APY: 40%"
-        android:textColor="@color/white"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/searchView"
         app:layout_constraintStart_toStartOf="@+id/searchView"

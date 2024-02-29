@@ -57,9 +57,21 @@
 
     <string name="are_you_sure">Are you sure?</string>
     <string name="secret_words_disclaimer">If you lose your secret words, you will lose your access to your wallet.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="stake">Stake</string>
     <string name="stake_desc">Stake your COMs and enjoy a current validator annual percentage yield (APY) of 40%</string>
+
+
+    <string name="warning_title">Warning!</string>
+    <string name="pk_warning_message">Important Security Reminders:\n\n
+• Never share your private seed with anyone.\n\n
+• Do not paste it into unknown apps or websites.\n\n
+• This may result in the loss of your funds and assets.</string>
+
+    <string name="pk_checkbox_text">I have read and understood the warning</string>
+    <string name="show_button_text">Show private seed</string>
+
+    <string name="pk_view_info">Here is your private key for %s. DO NOT SHARE WITH OTHERS OR PASTE IN UNKNOWN APPS OR WEBSITES.</string>
+
 
 </resources>

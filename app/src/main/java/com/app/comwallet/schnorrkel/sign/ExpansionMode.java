@@ -6,5 +6,6 @@ package com.app.comwallet.schnorrkel.sign;
  */
 public enum ExpansionMode {
     Uniform,
-    Ed25519;
+    Ed25519,
+    Sr25519;
 }

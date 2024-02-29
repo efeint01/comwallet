@@ -1,6 +1,9 @@
 package com.app.comwallet;
 
+import org.apache.commons.codec.binary.Hex;
+
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -22,14 +25,19 @@ import io.emeraldpay.polkaj.json.BlockResponseJson;
 import io.emeraldpay.polkaj.json.MethodsJson;
 import io.emeraldpay.polkaj.json.RuntimeVersionJson;
 import io.emeraldpay.polkaj.json.SystemHealthJson;
+import io.emeraldpay.polkaj.scale.ScaleExtract;
 import io.emeraldpay.polkaj.scaletypes.AccountInfo;
+import io.emeraldpay.polkaj.scaletypes.AccountStakeInfo;
+import io.emeraldpay.polkaj.scaletypes.Metadata;
+import io.emeraldpay.polkaj.scaletypes.MetadataReader;
 import io.emeraldpay.polkaj.tx.AccountRequests;
 import io.emeraldpay.polkaj.types.Address;
+import io.emeraldpay.polkaj.types.ByteData;
 import io.emeraldpay.polkaj.types.Hash256;
 
 public class CoreOperations {
 
-    public static String NODE_URL = "commune-api-node-2.communeai.net";
+    public static String NODE_URL = "commune-api-node-0.communeai.net";
 
     public static void main(String[] args) throws Exception {
 
@@ -42,12 +50,28 @@ public class CoreOperations {
                 .build();
 
         //Acc address for querying
-        Address address = Address.from("5GZBhMZZRMWCiqgqdDGZCGo16Kg5aUQUcpuUGWwSgHn9HbRC");
+        Address address = Address.from("5Ck49RLMKmxqzi5fZDH1AbDH9Cz3d1UhddfJBbBnzoRpDbyi");
 
-        getSystemInfo(api);
-        getAccBalance(address,api);
-        getRPCMethods(api);
-        subscribeNewHeaders();
+
+        //getSystemInfo(api);
+        //getRPCMethods(api);
+        //subscribeNewHeaders();
+
+        //getAccStakedBalance(api,address);
+
+//        ByteData metadata = api.execute(PolkadotApi.commands().stateMetadata())
+//                .get(5, TimeUnit.SECONDS);
+
+        Metadata metadata = api.execute(
+                        StandardCommands.getInstance().stateMetadata()
+                )
+                .thenApply(ScaleExtract.fromBytesData(new MetadataReader()))
+                .get();
+
+
+
+        System.out.println(metadata.toString());
+
 
     }
 
@@ -94,10 +118,31 @@ public class CoreOperations {
 
     }
 
-    public static void getAccBalance(Address address, PolkadotApi api) throws ExecutionException, InterruptedException {
+    public static void getAccBalance(PolkadotApi api, Address address) throws ExecutionException, InterruptedException {
         System.out.println("** --- BALANCE --- **\n");
         AccountInfo accountInfo = AccountRequests.balanceOf(address).execute(api).get();
         System.out.println("Balance: " + accountInfo.getData().getFree());
+    }
+
+    public static void getAccStakedBalance(PolkadotApi api, Address address) throws ExecutionException, InterruptedException {
+        System.out.println("** --- STAKED BALANCE --- **\n");
+
+
+        String encoded = Hex.encodeHexString(AccountRequests.stakedBalanceOf(address).encodeRequest().getBytes());
+        System.out.println(encoded);
+
+        ByteData byteData = api.execute(PolkadotApi.commands().stateGetStorage(AccountRequests.stakedBalanceOf(address).encodeRequest())).get();
+        System.out.println(byteData);
+        //AccountStakeInfo accountStakeInfo = AccountRequests.stakedBalanceOf(address).execute(api).get();
+
+        //AccountStakeBalance accountStakeBalance = new AccountStakeBalance(address);
+        //AccountStakeInfo byteData = accountStakeBalance.execute(api).get();
+
+
+        //System.out.println(byteData);
+
+
+
     }
 
     public static void getRPCMethods(PolkadotApi api) throws ExecutionException, InterruptedException {

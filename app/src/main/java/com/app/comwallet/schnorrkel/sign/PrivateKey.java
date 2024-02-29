@@ -1,9 +1,9 @@
 package com.app.comwallet.schnorrkel.sign;
 
-import cafe.cryptography.curve25519.Scalar;
-
 import com.app.comwallet.schnorrkel.merlin.Transcript;
 import com.app.comwallet.schnorrkel.utils.ScalarUtils;
+
+import cafe.cryptography.curve25519.Scalar;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

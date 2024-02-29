@@ -13,6 +13,9 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
 
+        <!-- Customize your theme here. -->
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+
     </style>
 
     <style name="Theme.Comwallet" parent="Base.Theme.Comwallet" />
@@ -33,7 +36,7 @@
         <item name="android:textSize">20sp</item>
         <item name="fontFamily">@font/medium</item>
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textColor">?android:textColorPrimaryInverse</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:letterSpacing">0</item> <!-- Remove font spacing -->
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Button.Rounded</item>
         <item name="strokeColor">@color/primary</item>
@@ -114,8 +117,7 @@
 
     <style name="RowSecretWordStyle" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/regular</item>
-        <item name="android:background">@drawable/bg_oval_white</item>
-        <item name="singleLine">true</item>
+        <item name="android:background">@drawable/bg_oval_gray</item>
         <item name="android:padding">16dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/black</item>
@@ -137,6 +139,7 @@
         <item name="cornerSizeBottomRight">0dp</item>
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
+
 
     <style name="ErrorTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/semi_bold</item>
